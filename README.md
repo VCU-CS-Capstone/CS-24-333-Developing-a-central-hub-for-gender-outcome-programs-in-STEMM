@@ -13,11 +13,13 @@ a better understanding of the problems you encountered during the developmemnt o
 | Status Reports | Project management documentation - weekly reports, milestones, etc. |
 | scr | Source code - create as many subdirectories as needed |
 
+Google Drive Folder: Google Drive Folder: https://drive.google.com/drive/folders/1QihHS5XUBPD8FFhfSKFwHFJ_0BuJ9WXY?usp=sharing
+
 ## Project Team
 - *Mentor's Name*  - *Company Affliation* - Mentor
 - *Technical Advisor Name* - *Company Affliation* - Technical Advisor
 - *Faculty Advisor's Name* - *Department* - Faculty Advisor
 - *Matt Frayser* - *Computer Science* - Student Team Member
 - *Jennifer Bonda* - *Computer Science* - Student Team Member
-- *Student's Name* - *major* - Student Team Member
-- *Student's Name* - *major* - Student Team Member
+- *Dimaryi Romero* - *Computer Science* - Student Team Member
+- *Valencia Carter* - *Computer Science* - Student Team Member
