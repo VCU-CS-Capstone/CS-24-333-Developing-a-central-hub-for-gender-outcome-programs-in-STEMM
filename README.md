@@ -16,9 +16,8 @@ a better understanding of the problems you encountered during the developmemnt o
 Google Drive Folder: Google Drive Folder: https://drive.google.com/drive/folders/1QihHS5XUBPD8FFhfSKFwHFJ_0BuJ9WXY?usp=sharing
 
 ## Project Team
-- *Mentor's Name*  - *Company Affliation* - Mentor
-- *Technical Advisor Name* - *Company Affliation* - Technical Advisor
-- *Faculty Advisor's Name* - *Department* - Faculty Advisor
+- *Amy Olex* - *VCU* - Technical Advisor
+- *John Leonard* - *Computer Science* - Faculty Advisor
 - *Matt Frayser* - *Computer Science* - Student Team Member
 - *Jennifer Bonda* - *Computer Science* - Student Team Member
 - *Dimaryi Romero* - *Computer Science* - Student Team Member
