@@ -31,9 +31,9 @@ Status Report Template: https://github.com/VCU-CS-Capstone/0000---Capstone-Templ
 
 | Document | Tasks | Accomplishments| Issues |
 |---|---|---|---|
-| Week 1 Status Report | | | |
-| Week 2 Status Report | | | |
-| Week 3 Status Report | | | |
+| Week 1 Status Report | Made a plan for the semester on what we want to accomplish | | |
+| Week 2 Status Report | Met with advisors and discussed our ideologies for this semester | | |
+| Week 3 Status Report | Sketched a database using crow's foot diagram using mermaid live | | |
 | Week 4 Status Report | | | |
 | Week 5 Status Report | | | |
 | Week 6 Status Report | | | |
