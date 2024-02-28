@@ -1,0 +1,217 @@
+---
+title: CS-24-333-Developing-a-central-hub-for-gender-outcome-programs-in-STEMM
+date: 02/26/2024
+format:
+    html:
+        theme: cosmo
+        toc: true
+        embed-resources: true
+        code-copy: true
+---
+
+This document explores the database that is created from the ddl sql file. It contains a Crows-foot diagram to help visualize the resume database. Many blocks of python code are within this file to help retrieve tables and filter on certain critera to show specific queries from the database. 
+
+GITHUB URL:  <https://github.com/VCU-CS-Capstone/CS-24-333-Developing-a-central-hub-for-gender-outcome-programs-in-STEMM>
+
+```{python}
+#| eval: true
+#| echo: false
+import os
+import sys
+import pandas as pd
+from tabulate import tabulate
+from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
+from sqlalchemy.exc import OperationalError, ProgrammingError
+from IPython.display import display, Markdown
+```
+```{python}
+#| eval: true
+#| echo: false
+
+# modify config_map to reflect credentials needed by this program
+config_map = {
+    'user':'CS_USER',
+    'password':'CS_PASSWORD',
+    'host':'CS_HOST',
+    'database':'CS_DB_NAME'
+}
+# load and store credentials
+load_dotenv()
+config = {}
+for key in config_map.keys():
+    config[key] = os.getenv(config_map[key])
+flag = False
+for param in config.keys():
+    if config[param] is None:
+        flag = True
+        print(f"Missing {config_map[param]} in .env file")
+#if flag:
+#    sys.exit(1)
+```
+```{python}
+#| eval: true
+#| echo: false
+
+# build a sqlalchemy engine string
+engine_uri = f"mysql+pymysql://{config['user']}:{config['password']}@{config['host']}/{config['database']}"
+
+# create a database connection.  THIS IS THE ACTUAL CONNECTION!
+try:
+    cnx = create_engine(engine_uri)
+except ArgumentError as e:
+    print(f"create_engine: Argument Error: {e}")
+    #sys.exit(1)
+except NoSuchModuleError as e:
+    print(f"create_engine: No Such Module Error: {e}")
+    #sys.exit(1)
+except Exception as e:
+    print(f"create_engine: An error occurred: {e}")
+    #sys.exit(1)
+```
+```{python}
+#| echo: false
+#| eval: true
+
+# Do a quick test of the connection and trap the errors better!
+try:
+    databases = pd.read_sql("show databases",cnx)
+except ImportError as e:
+    print(f"Error: {e}")
+except OperationalError as e:
+    print(f"Database/SQL Error:\n{str(e)}\n")
+except ProgrammingError as e:
+    print(f"Programming Error:\n{str(e)}\n")
+except Exception as e:
+    print(f"An error occurred:\n{str(e)}\n")
+
+```
+
+
+## Crows-foot diagram
+
+The below is an entity-relationship diagram represented using mermaid syntax.
+
+```{mermaid}
+%%| echo: false
+erDiagram
+    Paper ||--o{ Author : "is written by"
+    Paper ||--o{ PaperKeyword : "has"
+    Paper ||--o{ PaperCategory : "belongs to"
+    Category ||--o{ PaperCategory : "contains"
+    Keyword ||--o{ PaperKeyword : "describes"
+Paper {
+    int paperID
+    VARCHAR Title
+    VARCHAR Content
+    VARCHAR PaperURL
+    DATE SubmissionDate
+    VARCHAR AuthorID
+}
+Author {
+    int AuthorID
+    VARCHAR FirstName
+    VARCHAR LastName
+    VARCHAR Email
+}
+Category {
+    int categoryID
+    VARCHAR categoryNAME
+}
+Keyword {
+    int KeywordID
+    VARCHAR KeywordName
+}
+PaperKeyword {
+    int PaperKeyword
+    int paperID
+    int KeywordID
+}
+PaperCategory {
+    int PaperCategory
+    int paperID
+    int categoryID
+}
+
+```
+
+## Examples of data in the database
+Below are examples of data in the database
+
+# Paper table
+```{python}
+#| echo: false
+#| eval: true
+sql = f"""
+select * from paper;
+"""
+
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+```
+
+
+# Category table
+```{python}
+#| echo: false
+#| eval: true
+sql = f"""
+select * from category;
+"""
+
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+```
+
+# Paper Category table
+```{python}
+#| echo: false
+#| eval: true
+sql = f"""
+select * from paperCategory;
+"""
+
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+```
+
+# Display papers with category name 'Undergrad'
+
+```{python}
+#| echo: false
+#| eval: true
+sql = f"""
+SELECT p.title, pc.categoryID
+FROM paper p
+JOIN paperCategory pc ON p.paperID = pc.paperID
+JOIN category c ON pc.categoryID = c.categoryID
+WHERE c.categoryName = 'Undergrad';
+"""
+
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+```
