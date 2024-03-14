@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export default function Login() {
-    return (
+  return (
     <div>
         <Navbar />
       <div className = "text-center text-7xl mt-40 mb-20 ">
