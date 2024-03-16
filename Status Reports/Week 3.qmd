@@ -1,0 +1,35 @@
+---
+title: Semester 2 - Week 3 Status Report
+Team: CS-24-333
+date: last-modified
+format:
+  html:
+    embed-resources: true
+    theme: cosmo
+---
+
+## Progress Made This Week (02/04/24 - 02/09/24)
+
+### Front-end Team
+ * Redesigned figma wireframe to be a dynamic prototype
+    - Displays all planned pages of the website
+    - Buttons on each page are clickable and routes user to other connected page
+    - Link: <https://www.figma.com/file/VCYZxIhH9OL5FlCgTZnAsI/Prototype?type=design&mode=design&t=n2QaBV4jzUlNc0a5-1>
+
+### Back-end Team
+ * Started database design and created ER diagram
+    - Shows tables in the database
+    - Shows the attributes and entity relationships 
+
+## Plans For Next Week (02/12/24 - 02/16/24)
+
+### Front-end Team
+ * Have 4 pages of the website coded
+    - 2 pages coded by Matt
+    - 2 pages coded by Jennifer
+
+### Back-end Team
+ * Continue database design
+ * Work on ddl file
+
+
