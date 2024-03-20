@@ -100,6 +100,7 @@ erDiagram
     Paper ||--o{ PaperCategory : "belongs to"
     Category ||--o{ PaperCategory : "contains"
     Keyword ||--o{ PaperKeyword : "describes"
+    Author ||--o{ AuthorPaper : "writes"
 Paper {
     int paperID
     VARCHAR Title
@@ -112,7 +113,6 @@ Author {
     int AuthorID
     VARCHAR FirstName
     VARCHAR LastName
-    VARCHAR Email
 }
 Category {
     int categoryID
@@ -132,7 +132,11 @@ PaperCategory {
     int paperID
     int categoryID
 }
-
+AuthorPaper {
+    int AuthorPaperID
+    int AuthorID
+    int paperID
+}
 ```
 
 ## Examples of data in the database

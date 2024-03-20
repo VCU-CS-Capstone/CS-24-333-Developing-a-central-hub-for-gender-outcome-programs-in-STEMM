@@ -3332,6 +3332,7 @@ z-index: 1000;
     Paper ||--o{ PaperCategory : &quot;belongs to&quot;
     Category ||--o{ PaperCategory : &quot;contains&quot;
     Keyword ||--o{ PaperKeyword : &quot;describes&quot;
+    Author ||--o{ AuthorPaper : &quot;writes&quot;
 Paper {
     int paperID
     VARCHAR Title
@@ -3344,7 +3345,6 @@ Author {
     int AuthorID
     VARCHAR FirstName
     VARCHAR LastName
-    VARCHAR Email
 }
 Category {
     int categoryID
@@ -3364,7 +3364,11 @@ PaperCategory {
     int paperID
     int categoryID
 }
-
+AuthorPaper {
+    int AuthorPaperID
+    int AuthorID
+    int paperID
+}
 </pre>
 </div>
 </div>

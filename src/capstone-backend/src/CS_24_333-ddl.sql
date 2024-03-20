@@ -11,18 +11,18 @@ DROP TABLE IF EXISTS author;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS keyword;
 DROP TABLE IF EXISTS paperkeyword;
+DROP TABLE IF EXISTS authorPaper;
 # ... 
 SET FOREIGN_KEY_CHECKS=1;
 
 # Section 2
-# Create author(authorID, firstName, lastName, email)
+# Create author(authorID, firstName, lastName)
 
 drop table if exists author;
 CREATE TABLE author (
     authorID int primary key,
     firstName varchar(255) NOT NULL,
-    lastName varchar(255) NOT NULL,
-    email varchar(255)
+    lastName varchar(255) NOT NULL
 );
 
 select * from author;
@@ -30,7 +30,8 @@ select * from author;
 # populate author
 insert into author(authorID, firstName, lastName) values
     (1, 'Deidra', 'Crews'),
-    (2, 'Taylor', 'Barongan');
+    (2, 'Katherine', 'Wilson'),
+    (3, 'Taylor', 'Barongan');
 
 select * from author;
 
@@ -131,7 +132,7 @@ insert into paperKeyword(paperKeywordID, paperID, keywordID) values
     (1, 1, 3),
     (2, 2, 1);
 
-select * from keyword;
+select * from paperKeyword;
 
 
 # Section 7
@@ -164,4 +165,25 @@ insert into paperCategory(paperID, categoryID) values
 select * from paperCategory;
 
 
+# Section 8
+# Create authorPaper(AuthorPaperID, AuthorID, paperID)
+drop table if exists authorPaper;
+CREATE TABLE authorPaper (
+    AuthorPaperID int auto_increment,
+    AuthorID int,
+    paperID int,
+    foreign key (AuthorID) references author(AuthorID),
+    foreign key (paperID) references paper(paperID),
+    primary key (AuthorPaperID)
+);
+
+select * from authorPaper;
+
+# populate authorPaper
+insert into authorPaper(AuthorID, paperID) values
+    (1, 1),
+    (2, 1),
+    (2, 2);
+
+select * from authorPaper;
 
