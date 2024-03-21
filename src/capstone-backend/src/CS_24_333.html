@@ -3286,7 +3286,7 @@ z-index: 1000;
   <li><a href="#crows-foot-diagram" id="toc-crows-foot-diagram" class="nav-link active" data-scroll-target="#crows-foot-diagram">Crows-foot diagram</a></li>
   <li><a href="#examples-of-data-in-the-database" id="toc-examples-of-data-in-the-database" class="nav-link" data-scroll-target="#examples-of-data-in-the-database">Examples of data in the database</a></li>
   <li><a href="#paper-table" id="toc-paper-table" class="nav-link" data-scroll-target="#paper-table">Paper table</a></li>
-  <li><a href="#category-table" id="toc-category-table" class="nav-link" data-scroll-target="#category-table">Category table</a></li>
+  <li><a href="#agie-category-table" id="toc-agie-category-table" class="nav-link" data-scroll-target="#agie-category-table">AGIE Category table</a></li>
   <li><a href="#paper-category-table" id="toc-paper-category-table" class="nav-link" data-scroll-target="#paper-category-table">Paper Category table</a></li>
   <li><a href="#display-papers-with-category-name-undergrad" id="toc-display-papers-with-category-name-undergrad" class="nav-link" data-scroll-target="#display-papers-with-category-name-undergrad">Display papers with category name ‘Undergrad’</a></li>
   </ul>
@@ -3327,47 +3327,45 @@ z-index: 1000;
 <div>
 <div>
 <pre class="mermaid mermaid-js">erDiagram
-    Paper ||--o{ Author : &quot;is written by&quot;
-    Paper ||--o{ PaperKeyword : &quot;has&quot;
-    Paper ||--o{ PaperCategory : &quot;belongs to&quot;
-    Category ||--o{ PaperCategory : &quot;contains&quot;
-    Keyword ||--o{ PaperKeyword : &quot;describes&quot;
-    Author ||--o{ AuthorPaper : &quot;writes&quot;
-Paper {
-    int paperID
-    VARCHAR Title
-    VARCHAR Content
-    VARCHAR PaperURL
-    DATE SubmissionDate
-    VARCHAR AuthorID
+    paper ||--o{ author : &quot;is written by&quot;
+    paper ||--o{ paperKeyword : &quot;has&quot;
+    paper ||--o{ paperCategory : &quot;belongs to&quot;
+    agieCategory ||--o{ paperCategory : &quot;contains&quot;
+    keyword ||--o{ paperKeyword : &quot;describes&quot;
+    author ||--o{ authorPaper : &quot;writes&quot;
+paper {
+    int paperPMID
+    VARCHAR title
+    VARCHAR content
+    VARCHAR paperURL
+    DATE publishedDate
 }
-Author {
-    int AuthorID
-    VARCHAR FirstName
-    VARCHAR LastName
+author {
+    int authorID
+    VARCHAR authorName
 }
-Category {
+agieCategory {
     int categoryID
-    VARCHAR categoryNAME
+    VARCHAR categoryName
 }
-Keyword {
-    int KeywordID
-    VARCHAR KeywordName
+keyword {
+    int keywordID
+    VARCHAR keywordName
 }
-PaperKeyword {
-    int PaperKeyword
-    int paperID
-    int KeywordID
+paperKeyword {
+    int paperKeywordID
+    int paperPMID
+    int keywordID
 }
-PaperCategory {
-    int PaperCategory
-    int paperID
+paperCategory {
+    int paperCategoryID
+    int paperPMID
     int categoryID
 }
-AuthorPaper {
+authorPaper {
     int AuthorPaperID
-    int AuthorID
-    int paperID
+    int authorID
+    int paperPMID
 }
 </pre>
 </div>
@@ -3390,29 +3388,29 @@ AuthorPaper {
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">paperID</th>
+<th data-quarto-table-cell-role="th">paperPMID</th>
 <th data-quarto-table-cell-role="th">title</th>
+<th data-quarto-table-cell-role="th">content</th>
 <th data-quarto-table-cell-role="th">paperURL</th>
-<th data-quarto-table-cell-role="th">submissionDate</th>
-<th data-quarto-table-cell-role="th">authorID</th>
+<th data-quarto-table-cell-role="th">publishedDate</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
+<td>32096414</td>
 <td>Helping Scholars Overcome Socioeconomic Barrie...</td>
+<td>None</td>
 <td>https://pubmed-ncbi-nlm-nih-gov.proxy.library....</td>
 <td>2020-02-25</td>
-<td>1</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
+<td>37736045</td>
 <td>Project Strengthen: An STEMM-focused career de...</td>
+<td>None</td>
 <td>https://pubmed.ncbi.nlm.nih.gov/37736045/</td>
 <td>2023-10-20</td>
-<td>2</td>
 </tr>
 </tbody>
 </table>
@@ -3421,8 +3419,8 @@ AuthorPaper {
 </div>
 </div>
 </section>
-<section id="category-table" class="level1">
-<h1>Category table</h1>
+<section id="agie-category-table" class="level1">
+<h1>AGIE Category table</h1>
 <div class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -3516,7 +3514,7 @@ AuthorPaper {
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">paperCategoryID</th>
-<th data-quarto-table-cell-role="th">paperID</th>
+<th data-quarto-table-cell-role="th">paperPMID</th>
 <th data-quarto-table-cell-role="th">categoryID</th>
 </tr>
 </thead>
@@ -3524,49 +3522,49 @@ AuthorPaper {
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>1</td>
-<td>1</td>
+<td>32096414</td>
 <td>2</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>2</td>
-<td>1</td>
+<td>32096414</td>
 <td>4</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>3</td>
-<td>1</td>
+<td>32096414</td>
 <td>9</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>4</td>
-<td>1</td>
+<td>32096414</td>
 <td>10</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>5</td>
-<td>2</td>
+<td>37736045</td>
 <td>4</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>6</td>
-<td>2</td>
+<td>37736045</td>
 <td>5</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>7</td>
-<td>2</td>
+<td>37736045</td>
 <td>10</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>8</td>
-<td>2</td>
+<td>37736045</td>
 <td>11</td>
 </tr>
 </tbody>
