@@ -1,0 +1,150 @@
+html {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  background: rgb(220, 241, 239);
+}
+main {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  min-width: 20rem;
+  max-width: 40rem;
+  min-height: 100%;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+main p {
+  line-height: 1.5rem;
+  padding: 1rem 1rem 1rem 1rem
+}
+
+.home-search-input{
+  border-color: #1c1c1c2e;
+  border-radius: 10px;
+  padding: 10px;
+  width: 45%;
+  height: 30px;
+}
+
+.home-search-form{
+  flex:1;
+  align-items: center;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.home-title{
+  text-align: center;
+  margin-top: 200px;
+}
+
+.search-form {
+  max-width: 500px;
+  margin-top: 10px;
+  padding: 20px;
+  margin-left: -25px;
+  text-align: center;
+}
+
+.search-input {
+  margin-right: 10px;
+  padding: 10px;
+  width: 70%;
+}
+
+.search-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #313232;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.search-button:hover{
+  background-color: #626464;
+}
+.results-list {
+  list-style: none;
+  padding: 0;
+}
+
+.result-item {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #46464650;
+  box-sizing: border-box;
+}
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item:hover{
+  background-color: rgba(255, 255, 255, 0.523)
+}
+
+.paper-details {
+  margin-top: 10px;
+  padding: 10px;
+  text-align: left;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+  background-color: #e9ecef;
+  border-radius: 5px;
+}
+
+.selected{
+  flex:auto;
+  width: 30%;
+  padding: 8px;
+  margin: 4px 0;
+}
+
+.link_button{
+  padding: 20px 20px 20px 20px;
+  cursor: pointer;
+  background-color: #1c1c1c;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+}
+
+.link_button:hover{
+  background-color: #646464
+}
+
+.selected_abstract{
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 80%;
+  border-radius: 15px;
+  border:none;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #09f;
+
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
