@@ -95,44 +95,46 @@ The below is an entity-relationship diagram represented using mermaid syntax.
 ```{mermaid}
 %%| echo: false
 erDiagram
-    Paper ||--o{ Author : "is written by"
-    Paper ||--o{ PaperKeyword : "has"
-    Paper ||--o{ PaperCategory : "belongs to"
-    Category ||--o{ PaperCategory : "contains"
-    Keyword ||--o{ PaperKeyword : "describes"
-Paper {
-    int paperID
-    VARCHAR Title
-    VARCHAR Content
-    VARCHAR PaperURL
-    DATE SubmissionDate
-    VARCHAR AuthorID
+    paper ||--o{ author : "is written by"
+    paper ||--o{ paperKeyword : "has"
+    paper ||--o{ paperCategory : "belongs to"
+    agieCategory ||--o{ paperCategory : "contains"
+    keyword ||--o{ paperKeyword : "describes"
+    author ||--o{ authorPaper : "writes"
+paper {
+    int paperPMID
+    VARCHAR title
+    VARCHAR content
+    VARCHAR paperURL
+    DATE publishedDate
 }
-Author {
-    int AuthorID
-    VARCHAR FirstName
-    VARCHAR LastName
-    VARCHAR Email
+author {
+    int authorID
+    VARCHAR authorName
 }
-Category {
+agieCategory {
     int categoryID
-    VARCHAR categoryNAME
+    VARCHAR categoryName
 }
-Keyword {
-    int KeywordID
-    VARCHAR KeywordName
+keyword {
+    int keywordID
+    VARCHAR keywordName
 }
-PaperKeyword {
-    int PaperKeyword
-    int paperID
-    int KeywordID
+paperKeyword {
+    int paperKeywordID
+    int paperPMID
+    int keywordID
 }
-PaperCategory {
-    int PaperCategory
-    int paperID
+paperCategory {
+    int paperCategoryID
+    int paperPMID
     int categoryID
 }
-
+authorPaper {
+    int AuthorPaperID
+    int authorID
+    int paperPMID
+}
 ```
 
 ## Examples of data in the database
@@ -157,12 +159,12 @@ df
 ```
 
 
-# Category table
+# AGIE Category table
 ```{python}
 #| echo: false
 #| eval: true
 sql = f"""
-select * from category;
+select * from agieCategory;
 """
 
 try:
@@ -201,8 +203,8 @@ df
 sql = f"""
 SELECT p.title, pc.categoryID
 FROM paper p
-JOIN paperCategory pc ON p.paperID = pc.paperID
-JOIN category c ON pc.categoryID = c.categoryID
+JOIN paperCategory pc ON p.paperPMID = pc.paperPMID
+JOIN agieCategory c ON pc.categoryID = c.categoryID
 WHERE c.categoryName = 'Undergrad';
 """
 
