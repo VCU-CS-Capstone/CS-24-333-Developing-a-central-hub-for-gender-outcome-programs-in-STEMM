@@ -124,6 +124,7 @@ def api_show_paper():
     except Exception as e:
         print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to fetch papers"}), 500
+<<<<<<< HEAD
 
 
 #displays the papers that have matching input words to the papers' titles or abstracts
@@ -145,6 +146,12 @@ def api_show_papers_by_words():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+=======
+>>>>>>> 768a1ac994cbb6b451dadbded5c2841de126863a
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     app.run(port=8080)
+=======
+    app.run(port=8080)
+>>>>>>> 768a1ac994cbb6b451dadbded5c2841de126863a

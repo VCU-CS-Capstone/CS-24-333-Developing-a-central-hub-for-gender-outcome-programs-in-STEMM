@@ -1,41 +1,51 @@
 "use client"
 import React, { useState } from 'react';
-import Link from "next/link";
-//import { useNavigate } from 'react-router-dom';
 
+const SearchBar = ({ onSearchResults }) => {
+  const [query, setQuery] = useState('');
+  const url = 'http://127.0.0.1:8080';
 
-function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    fetch(`http://127.0.0.1:5000/api/paperbycategory/${searchTerm}`)
-    .then(response => {
-      if (!response.ok) {
-        //throw new Error(HTTP error! status: ${response.status});
+  // Function to fetch search results
+  const fetchSearchResults = async (searchQuery) => {
+    const apiUrl = `${url}/api/paperbycategory?q=${encodeURIComponent(searchQuery)}`;
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      if (onSearchResults) {
+        onSearchResults(data); 
       }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-    console.log(`Searching for ${searchTerm}...`);
+    } catch (error) {
+      console.error('Error fetching search results: ', error);
+      if (onSearchResults) {
+        onSearchResults([]); 
+      }
+    }
+  };
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+    setQuery(newValue);
   };
 
-  function handleClick(){
-    navigate('/result')
-  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchSearchResults(query);
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input className="w-[300px] h-[40px] text-black border-2 border-black/70 rounded-full px-2 py-2" type="text" placeholder='Search all of the database...' value={searchTerm} onChange={handleChange} />
-      <button className='bg-black/80 text-white rounded-full px-3 py-2 hover:bg-black/50' type="button" onClick={handleClick}>Search</button>
+    <form onSubmit={handleSubmit}  >
+      <input 
+        type="text"
+        className="w-[300px] h-[40px] text-black border-2 border-black/70 rounded-full px-2 py-2" 
+        value={query} 
+        onChange={handleChange}
+        placeholder='Search all of the database...' 
+        
+      />
+      <button 
+        className='bg-black/80 text-white rounded-full px-3 py-2 hover:bg-black/50' 
+        type="submit">Search
+      </button>
     </form>
   );
 }

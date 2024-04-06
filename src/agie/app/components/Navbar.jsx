@@ -49,7 +49,7 @@ const Navbar = () => {
                   Home
                 </li>
             </Link>
-            <Link href="/about">
+            <Link href="/pages/about">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -57,7 +57,7 @@ const Navbar = () => {
                   About
                 </li>
             </Link>
-            <Link href="/contact">
+            <Link href="/pages/contact">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -65,7 +65,7 @@ const Navbar = () => {
                   Contact Us
                 </li>
             </Link>
-            <Link href="/login">
+            <Link href="/pages/login">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -73,7 +73,7 @@ const Navbar = () => {
                   Login
                 </li>
             </Link>
-            <Link href="/profile">
+            <Link href="/pages/profile">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -89,16 +89,16 @@ const Navbar = () => {
       <div className="hidden sm:flex items-center justify-start">
           <ul className="hidden sm:flex">
             <li className="ml-10 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
-              <Link href="/about">About</Link>
+              <Link href="/pages/about">About</Link>
             </li>
             <li className="ml-10 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/pages/contact">Contact Us</Link>
             </li>
             <li className="ml-10 uppercase hover:border-b text-xl my-3" style={{ color: '#CDAE5E' }}>
-              <Link href="/login">Login</Link>
+              <Link href="/pages/login">Login</Link>
             </li>
             <li className="ml-10 hover:border-b ">
-              <Link href="/profile">
+              <Link href="/pages/profile">
                 <Image 
                   src ={Logo}
                   alt = "Useruser"
