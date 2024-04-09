@@ -10,6 +10,7 @@ export default function SearchPage() {
     const [allPapers, setAllPapers] = useState([]);
     const [tempSelectedCategories, setTempSelectedCategories] = useState([]);
     const [filteredPapers, setFilteredPapers] = useState([]);
+    const [sortCriteria, setSortCriteria] = useState('publishDate');
   
     const url = 'http://127.0.0.1:8080';
   
@@ -57,19 +58,36 @@ export default function SearchPage() {
               })
               .catch(error => console.error('Error fetching papers by categories', error));
         };
+
+        useEffect(() => {
+          const sortedPapers = [...filteredPapers].sort((a, b) => {
+              if (sortCriteria === 'publishDate') {
+                  return new Date(b.publishedDate) - new Date(a.publishedDate);
+              } else if (sortCriteria === 'recentlyAdded') {
+                  // Assuming `addedDate` exists and is the date when the paper was added to the system
+                  return new Date(b.addedDate) - new Date(a.addedDate);
+              }
+          });
+      
+          setFilteredPapers(sortedPapers);
+      }, [sortCriteria, allPapers]); 
   
     return (
         <>
             <Navbar />
-            <div className="w-full my-40">
-                <div className="flex w-full min-h-screen">
+            <div className="w-full top-20">
+                <div className="flex w-full pt-20">
                     <CategoriesSidebar
                         categories={categories}
                         tempSelectedCategories={tempSelectedCategories}
                         onCategoryToggle={handleCategoryToggle}
                         applyFilters={applyFilters}
                     />
-                    <ResultsContainer filteredPapers={filteredPapers} totalPapers={allPapers.length} />
+                    <ResultsContainer 
+                      filteredPapers={filteredPapers} 
+                      totalPapers={allPapers.length} 
+                      onSortCriteriaChange={setSortCriteria} 
+                    />
                 </div>
             </div>
             <Footer />
@@ -100,26 +118,30 @@ const CategoriesSidebar = ({ categories, tempSelectedCategories, onCategoryToggl
                     </li>
                 ))}
             </ul>
-            <button onClick={() => applyFilters()} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition">
+            <button onClick={() => applyFilters()} className="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-black/70 transition">
                 Apply Filters
             </button>
         </aside>
     );
 };
 // Format ALL results
-const ResultsContainer = ({ filteredPapers, totalPapers }) => {
-    return (
-      <section className="flex-grow p-4">
-        <SearchBar />
-        <SortAndFilterBar totalPapers={totalPapers} resultsCount={filteredPapers.length || 0} />
-        <div className="mt-4">
-          {filteredPapers.map((result, index) => (
-            <ResultItem key={index} result={result} />
-          ))}
-        </div>
-        <Pagination />
-      </section>
-    );
+const ResultsContainer = ({ filteredPapers, totalPapers, onSortCriteriaChange }) => {
+  return (
+    <section className="flex-grow p-4">
+      <SearchBar />
+      <SortAndFilterBar
+          totalPapers={totalPapers}
+          resultsCount={filteredPapers.length || 0}
+          onSortCriteriaChange={onSortCriteriaChange}
+      />
+      <div className="mt-4">
+        {filteredPapers.map((result, index) => (
+          <ResultItem key={index} result={result} />
+        ))}
+      </div>
+      <Pagination />
+    </section>
+  );
 };
 
 // TEMP
@@ -132,16 +154,27 @@ const SearchBar = () => (
 );
 
 // Kinds cool
-const SortAndFilterBar = ({ totalPapers, resultsCount }) => (
-    <div className="flex justify-between items-center my-2">
-      <div>Sort by: Newest | etc.</div>
-      <div>
-        Showing {resultsCount} of {totalPapers} results
-      </div>
+const SortAndFilterBar = ({ totalPapers, resultsCount, onSortCriteriaChange }) => (
+  <div className="flex justify-between items-center my-2">
+    <div>
+      Sort by: 
+      <select 
+        onChange={(e) => onSortCriteriaChange(e.target.value)}
+        style={{ border: 'none', fontSize: 17 }}
+      >
+        <option value="publishDate">Publish Date</option>
+        <option value="publishDate">Placeholder 1</option>
+        <option value="publishDate">Placeholder 2</option>
+        <option value="publishDate">Placeholder 3</option>
+      </select>
     </div>
-  );
+    <div>
+      Showing {resultsCount} of {totalPapers} results
+    </div>
+  </div>
+);
 
-  // Individual Results
+ // Individual Results
   const ResultItem = ({ result }) => {
     const formattedDate = new Date(result.publishedDate).toLocaleDateString('en-US', {
       year: 'numeric',

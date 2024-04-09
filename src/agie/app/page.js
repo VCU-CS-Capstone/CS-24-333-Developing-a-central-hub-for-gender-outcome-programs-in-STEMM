@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar'
 import { Inter } from 'next/font/google'
-import Searchbar from './components/Searchbar'
+import SearchBar from './components/Searchbar'
 import Footer from './components/Footer'
 import Link from "next/link"
 import ImageSlider from './components/ImageSlider';
@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin']})
 export default function Home() {
   return (
     <div>
+      <Navbar />
       <div className='homePage'>
         <div className="contentWrapper">
 
@@ -20,14 +21,13 @@ export default function Home() {
             complex, contested, and slow moving. The AGIE Project aims to increase the participation and advancement of diverse women faculty 
             in the science, technology, engineering, mathematics, and medicine (STEMM) academic and research workforce. This central repository provides data, 
             tools, programs, and strategies that promote gender equity at the faculty and leadership levels in the STEMM academic and research workforce.</h2>
-            <Searchbar />
+      
           </div>
 
           <ImageSlider />
         </div>
       </div>
 
-      <Navbar />
       <Footer />
     </div>
   );

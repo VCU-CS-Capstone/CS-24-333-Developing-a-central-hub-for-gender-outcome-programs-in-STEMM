@@ -1,3 +1,13 @@
+export const SearchBar = () => (
+  <input
+      className="border p-2 w-[500px] my-4"
+      type="search"
+      placeholder="Type something"
+  />
+);
+
+
+/*
 "use client"
 import React, { useState } from 'react';
 
@@ -51,3 +61,5 @@ const SearchBar = ({ onSearchResults }) => {
 }
 
 export default SearchBar;
+
+*/

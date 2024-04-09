@@ -15,7 +15,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed top-0 left-0 w-full h-20 shadow-xl bg-black"> 
+    <nav className="top-0 left-0 w-full h-20 shadow-xl bg-black"> 
       <div className="flex justify-between items-center h-full w-full px-10 2xl:px-16"> 
       
         {/* Agie Project link */}
