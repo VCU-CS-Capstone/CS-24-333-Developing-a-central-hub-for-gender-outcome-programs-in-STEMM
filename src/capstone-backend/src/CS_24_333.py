@@ -48,7 +48,10 @@ def handle_exception(e):
 
 def my_sql_wrapper(query, params):
     try:
-        df = pd.read_sql(query, cnx, params=params)
+        if params is None:
+            df = pd.read_sql(query, cnx)
+        else:
+            df = pd.read_sql(query, cnx, params=params)
     except Exception as e:
         message = str(e)
         print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
@@ -131,19 +134,35 @@ def api_show_paper():
 def api_show_papers_by_words():
     try:
         words = request.args.get('words')
+        if not words:
+            return jsonify([])  # Return an empty list if no words are provided
 
-        query = f"""
-            SELECT * 
-            FROM paper
-            WHERE title LIKE '%%{words}%%' OR content LIKE '%%{words}%%'
-        """
+        words = words.split()  # Splitting the query into words based on spaces
+        query_parts = []
+        params = {}
 
-        df = my_sql_wrapper(query, params={'words': words})
+        # Sanitize inputs to avoid SQL injection
+        sanitized_words = [word.replace('%', '\\%').replace('_', '\\_') for word in words]
+        
+        for i, word in enumerate(sanitized_words):
+            like_pattern = f'%{word}%'
+            query_part = f"(title LIKE :word{i} OR content LIKE :word{i})"
+            query_parts.append(query_part)
+            params[f'word{i}'] = like_pattern
+
+        query = "SELECT * FROM paper WHERE " + " OR ".join(query_parts)
+        query = text(query)  # Ensure the query is treated as a text object for SQLAlchemy
+
+        # Execute the query with sanitized parameters
+        df = pd.read_sql(query, cnx, params=params)
         papers_data = df.to_dict(orient='records')
-
+        
         return jsonify(papers_data)
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"Error: {str(e)}")
+        return jsonify({"error": "An error occurred while fetching the papers"}), 500
+
+
 
 
 if __name__ == "__main__":

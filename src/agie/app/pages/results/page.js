@@ -11,6 +11,7 @@ export default function SearchPage() {
     const [tempSelectedCategories, setTempSelectedCategories] = useState([]);
     const [filteredPapers, setFilteredPapers] = useState([]);
     const [sortCriteria, setSortCriteria] = useState('publishDate');
+    const [searchQuery, setSearchQuery] = useState('');
   
     const url = 'http://127.0.0.1:8080';
   
@@ -34,7 +35,7 @@ export default function SearchPage() {
 
 
       // Select and unselect categories
-      const handleCategoryToggle = (category) => {
+    const handleCategoryToggle = (category) => {
         setTempSelectedCategories(prev => {
             if (prev.includes(category)) {
                 return prev.filter(cat => cat !== category);
@@ -46,6 +47,10 @@ export default function SearchPage() {
     
     // Push query for categories
     const applyFilters = () => {
+      if (tempSelectedCategories.length === 0) {
+        setFilteredPapers(allPapers);
+        setSelectedCategories([]);
+      } else {
             const queryParams = new URLSearchParams();
             tempSelectedCategories.forEach(cat => queryParams.append('categoryName', cat));
         
@@ -57,9 +62,10 @@ export default function SearchPage() {
                 setSelectedCategories(tempSelectedCategories); // Update the selected categories state
               })
               .catch(error => console.error('Error fetching papers by categories', error));
+            }
         };
 
-        useEffect(() => {
+    useEffect(() => {
           const sortedPapers = [...filteredPapers].sort((a, b) => {
               if (sortCriteria === 'publishDate') {
                   return new Date(b.publishedDate) - new Date(a.publishedDate);
@@ -71,6 +77,19 @@ export default function SearchPage() {
       
           setFilteredPapers(sortedPapers);
       }, [sortCriteria, allPapers]); 
+
+
+  const handleSearch = (query) => {
+        setSearchQuery(query); // Update the search query state
+    
+        // Fetch papers based on search query
+        fetch(`${url}/api/papersbywords?words=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                setFilteredPapers(data); // Update the filtered papers with search results
+            })
+            .catch(error => console.error('Error fetching papers by words', error));
+    };
   
     return (
         <>
@@ -87,6 +106,7 @@ export default function SearchPage() {
                       filteredPapers={filteredPapers} 
                       totalPapers={allPapers.length} 
                       onSortCriteriaChange={setSortCriteria} 
+                      onSearchResults={handleSearch}
                     />
                 </div>
             </div>
@@ -125,10 +145,10 @@ const CategoriesSidebar = ({ categories, tempSelectedCategories, onCategoryToggl
     );
 };
 // Format ALL results
-const ResultsContainer = ({ filteredPapers, totalPapers, onSortCriteriaChange }) => {
+const ResultsContainer = ({ filteredPapers, totalPapers, onSortCriteriaChange, onSearchResults}) => {
   return (
     <section className="flex-grow p-4">
-      <SearchBar />
+      <SearchBar onSearchResults={onSearchResults} />
       <SortAndFilterBar
           totalPapers={totalPapers}
           resultsCount={filteredPapers.length || 0}
@@ -144,14 +164,6 @@ const ResultsContainer = ({ filteredPapers, totalPapers, onSortCriteriaChange })
   );
 };
 
-// TEMP
-const SearchBar = () => (
-  <input
-    className="border p-2 w-[500px] my-4"
-    type="search"
-    placeholder="Type something"
-  />
-);
 
 // Kinds cool
 const SortAndFilterBar = ({ totalPapers, resultsCount, onSortCriteriaChange }) => (
@@ -175,7 +187,7 @@ const SortAndFilterBar = ({ totalPapers, resultsCount, onSortCriteriaChange }) =
 );
 
  // Individual Results
-  const ResultItem = ({ result }) => {
+const ResultItem = ({ result }) => {
     const formattedDate = new Date(result.publishedDate).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -193,7 +205,7 @@ const SortAndFilterBar = ({ totalPapers, resultsCount, onSortCriteriaChange }) =
         <div className="text-sm text-gray-500">Published on: {formattedDate}</div>
       </div>
     );
-  };
+};
 
   // Navigation
   const Pagination = () => (
@@ -206,4 +218,26 @@ const SortAndFilterBar = ({ totalPapers, resultsCount, onSortCriteriaChange }) =
         {/* Buttons go here */}
       </div>
     </div>
+);
+
+const SearchBar = ({ onSearchResults }) => {
+  const [query, setQuery] = useState("");
+
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      onSearchResults(query); // Pass the query back up to the parent component
+  };
+
+  return (
+      <form onSubmit={handleSubmit} className="justify-row">
+          <input
+              className= "border p-2 w-[50%] my-4 rounded-2"
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search for papers..."
+          />
+          <button type="submit" className="bg-black/80 text-white rounded-full px-5 py-2 hover:bg-black/50">Search</button>
+      </form>
   );
+};

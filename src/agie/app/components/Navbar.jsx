@@ -1,8 +1,6 @@
 "use client";
 import React from 'react';
 import Link from "next/link";
-import Logo from "../../public/user.png";
-import Image from "next/image";
 import {AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 import { useState } from 'react';
 import Searchbar from './Searchbar';
@@ -65,20 +63,20 @@ const Navbar = () => {
                   Contact Us
                 </li>
             </Link>
+            <Link href="/pages/results">
+              <li
+                onClick={() => setMenuOpen(false)}
+                className="py-4 cursor-pointer"
+                >
+                  Search All Database
+                </li>
+            </Link>
             <Link href="/pages/login">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
                 >
-                  Login
-                </li>
-            </Link>
-            <Link href="/pages/profile">
-              <li
-                onClick={() => setMenuOpen(false)}
-                className="py-4 cursor-pointer"
-                >
-                  Profile
+                  Admin Login
                 </li>
             </Link>
           </ul>
@@ -88,26 +86,14 @@ const Navbar = () => {
       <div className="secondNav hidden sm:flex shadow-xl">
       <div className="hidden sm:flex items-center justify-start">
           <ul className="hidden sm:flex">
-            <li className="ml-10 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
+            <li className="ml-9 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
               <Link href="/pages/about">About</Link>
             </li>
-            <li className="ml-10 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
+            <li className="ml-9 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
               <Link href="/pages/contact">Contact Us</Link>
             </li>
-            <li className="ml-10 uppercase hover:border-b text-xl my-3" style={{ color: '#CDAE5E' }}>
-              <Link href="/pages/login">Login</Link>
-            </li>
-            <li className="ml-10 hover:border-b ">
-              <Link href="/pages/profile">
-                <Image 
-                  src ={Logo}
-                  alt = "Useruser"
-                  width = "40"
-                  height = "65"
-                  className="cursor-pointer"
-                  priority
-                  />
-              </Link>
+            <li className="ml-9 uppercase hover:border-b text-xl my-3" style={{ color: '#CDAE5E' }}>
+              <Link href="/pages/results">Search Database</Link>
             </li>
           </ul>
         </div>
