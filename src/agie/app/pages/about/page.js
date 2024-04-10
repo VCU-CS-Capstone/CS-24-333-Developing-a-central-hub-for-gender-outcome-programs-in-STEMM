@@ -5,10 +5,14 @@ export default function About() {
   return (
     <div>
         <Navbar />
-      <div className = "text-center text-7xl mt-40 mb-20 ">
-        About AGIE
+        <div className="bg-yellow-500/90 p-[7rem] pb-1">
+        <div className="items-center justify-center text-center">
+          <div className="text-7xl uppercase font-bold mt- mb-20">
+            About AGIE
+          </div>
+        </div>
       </div>
-        <div className="text-center text-3xl text-bold underline mt-3">
+        <div className="text-center text-3xl text-bold underline mt-10">
           Our Story
         </div>
         <div className="text-center text-2xl my-3 ml-40 mr-40"> 
