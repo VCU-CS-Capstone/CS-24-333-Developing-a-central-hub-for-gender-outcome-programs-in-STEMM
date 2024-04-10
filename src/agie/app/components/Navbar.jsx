@@ -21,6 +21,11 @@ const Navbar = () => {
           <Link href="/">Agie Project</Link>
         </div>
 
+       {/* Admin Login link */}
+        <div className="flex items-center uppercase hover:border-b text-1xl bg-gold" style={{ color: '#CDAE5E' }}>
+           <Link href="/pages/login">Admin Login</Link>
+        </div>
+
         {/* Three Line pop-up */}
         <div onClick={handleNav} className="md:hidden cursor-pointer pl-24">
           <AiOutlineMenu size={25} color={'white'}/>
