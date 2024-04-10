@@ -127,6 +127,22 @@ def api_show_paper():
     except Exception as e:
         print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to fetch papers"}), 500
+    
+
+@app.route('/api/categoryData', methods=["GET"])
+def api_get_category_count():
+    try:
+        query = """
+        SELECT agieCategory.categoryName, COUNT(paperCategory.categoryID) AS categoryCount
+        FROM agieCategory
+        LEFT JOIN paperCategory ON agieCategory.categoryID = paperCategory.categoryID
+        GROUP BY agieCategory.categoryID, agieCategory.categoryName
+        """
+        df = my_sql_wrapper(query, params=None)
+        categories_counts = df.to_dict(orient='records')
+        return jsonify(categories_counts)
+    except Exception as e:
+        return jsonify({'error': 'Failed to fetch categories and counts', 'details': str(e)}), 500
 
 
 #displays the papers that have matching input words to the papers' titles or abstracts
