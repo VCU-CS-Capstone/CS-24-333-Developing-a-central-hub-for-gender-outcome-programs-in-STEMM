@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from 'react';
-
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { useSearchParams } from 'next/navigation'
+
 
 export default function SearchPage() {
     const [categories, setCategories] = useState([]);
@@ -12,9 +13,19 @@ export default function SearchPage() {
     const [filteredPapers, setFilteredPapers] = useState([]);
     const [sortCriteria, setSortCriteria] = useState('publishDate');
     const [searchQuery, setSearchQuery] = useState('');
+    
+    const searchParams = useSearchParams();
+    const search = searchParams.get('query');
+    console.log(search);
+
+    useEffect(() => {
+        console.log( searchQuery)
+        handleSearch(searchQuery);
+    }, [search]);
+
   
     const url = 'http://127.0.0.1:8080';
-  
+
     useEffect(() => {
 
       // Fetch all papers
@@ -31,7 +42,14 @@ export default function SearchPage() {
         .then(response => response.json()) 
         .then(data => setCategories(data)) 
         .catch(error => console.error('Error fetching categories', error));
+      
     }, []);
+
+    // useEffect(() => {
+
+    //   handleSearch(search);
+
+    // }, []);
 
 
       // Select and unselect categories
@@ -89,6 +107,8 @@ export default function SearchPage() {
                 setFilteredPapers(data); // Update the filtered papers with search results
             })
             .catch(error => console.error('Error fetching papers by words', error));
+
+            
     };
   
     return (
@@ -210,9 +230,7 @@ const ResultItem = ({ result }) => {
   // Navigation
   const Pagination = () => (
     <div className="flex justify-between items-center border-t pt-4">
-      <span className="text-sm font-medium text-gray-500">
-        Showing 1-10 of 100 results
-      </span>
+      
       {/* Pagination buttons */}
       <div className="flex space-x-1">
         {/* Buttons go here */}

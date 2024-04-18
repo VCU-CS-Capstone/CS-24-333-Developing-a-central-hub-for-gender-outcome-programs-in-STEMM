@@ -18,10 +18,13 @@ export default function Home() {
 
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
+  
 
   const handleNavigation = () => {
     router.push(`/pages/results?query=${searchQuery}`);
 };
+
+
 
   const handleChange = (event) => {
     setSearchQuery(event.target.value);
@@ -40,7 +43,7 @@ export default function Home() {
         <div className="flex items-center justify-center space-x-1">
           <input
             type="text"
-            placeholder="Search our database for papers to advance gender equity in STEMM"
+            placeholder="Search our database for papers to advance gender equity in STEMM..."
             value={searchQuery}
             onChange={handleChange}
             className="p-2 w-[70%] rounded focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
@@ -59,16 +62,19 @@ export default function Home() {
         <div className="infoBox flex-1">
           <h1 className="text-center text-3xl font-bold mt-6 mb-4">The Advancing Gender Inclusive Excellence (AGIE) Repository</h1>
           <h2 className="text-center text-lg mt-3 mb-2">Institutional change in higher education regarding diversity, equity, and inclusion tends to be complex, contested, and slow moving. VCU has developed the National Coordinating Center for Advancing Gender Inclusive Excellence with the aim to increase the participation and advancement of diverse women faculty in STEMM. The three specific aims that this coordinating center aims to address are:</h2>
-          <h3 className="text-left text-lg mt-3 mb-2"> <b>Aim 1:</b> Evaluate the types and components of programs that substantially increase the participation and
+          <h3 className="text-left text-xl mt-3 mb-2 "> <b>Aim 1:</b> Evaluate the types and components of programs that substantially increase the participation and
 advancement of diverse women faculty.</h3>
-          <h4 className="text-left text-lg mt-3 mb-2"> <b>Aim 2:</b> Develop a central repository for data, tools, programs, and strategies that promote gender equity at the
+          <h4 className="text-left text-xl mt-3 mb-2"> <b>Aim 2:</b> Develop a central repository for data, tools, programs, and strategies that promote gender equity at the
 faculty and leadership levels in the STEMM academic and research workforce.</h4>
-          <h5 className="text-left text-lg mt-3 mb-2"> <b>Aim 3:</b> Promote and disseminate research on barriers and strategies to enhance the recruitment, retention and
+          <h5 className="text-left text-xl mt-3 mb-2"> <b>Aim 3:</b> Promote and disseminate research on barriers and strategies to enhance the recruitment, retention and
 advancement of STEMM women faculty in the academic and research workforce.</h5>
           <h6 className="text-center text-lg mt-3 mb-2"> This website was made to fulfill aim 2 through serving as a central repository that provides gathered resources to promote gender equity in academia.</h6>
         </div>
 
+
+        
         <div className="flex-1 flex justify-center">
+        
           <PieChart />
         </div>
       </main>
