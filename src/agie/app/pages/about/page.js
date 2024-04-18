@@ -24,6 +24,19 @@ export default function About() {
         <div className="text-center text-2xl my-3 ml-40 mr-40"> 
         We envision a future where women are not only well-represented in technology but are also leaders, influencers, and pioneers in shaping the industry's landscape. We believe in a world where every woman has equal opportunities to succeed and make impactful contributions to the field.
         </div>
+        <div className="text-center text-3xl text-bold underline mt-10">
+          Acknowledgements
+        </div>
+        <div className="text-center text-2xl my-3 ml-40 mr-40 mb-20"> 
+        Prototype website and database developed by Team CS-24-333 including:
+        <ul>
+          <li>Matt Frayser</li>
+          <li> Jennifer Bonda </li>
+          <li> Dimayri Romero </li>
+          <li> Valencia Carter </li>
+        </ul>
+        </div>
+
 
 
 
