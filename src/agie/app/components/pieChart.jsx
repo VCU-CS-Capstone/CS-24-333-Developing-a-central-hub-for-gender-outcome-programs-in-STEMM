@@ -82,8 +82,11 @@ function PieChart() {
 
 
   return (
+    <div className = "flex-col mt-10">
+    <div className="text-center font-bold text-xl"> Database Category Distribution</div>
     <div style={{ width: '400px', height: '400px', marginTop: '20px'}}>
       <Pie data={chartData} options={options}  />
+    </div>
     </div>
   );
 }
