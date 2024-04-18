@@ -18,7 +18,7 @@ const Navbar = () => {
       
         {/* Agie Project link */}
         <div className="flex items-center uppercase hover:border-b text-3xl font-bold bg-gold" style={{ color: '#CDAE5E' }}> 
-          <Link href="/">Agie Project</Link>
+          <Link href="/">Agie Repository</Link>
         </div>
 
        {/* Admin Login link */}
