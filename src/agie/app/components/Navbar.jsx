@@ -31,6 +31,7 @@ const Navbar = () => {
           <AiOutlineMenu size={25} color={'white'}/>
         </div>
       </div>
+      
       {/* Moble Menu */ }
       <div className={
         menuOpen 
