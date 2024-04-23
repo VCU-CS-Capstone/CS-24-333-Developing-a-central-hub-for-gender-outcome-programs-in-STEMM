@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 export default function SearchPage() {
     const [categories, setCategories] = useState([]);
@@ -12,6 +12,8 @@ export default function SearchPage() {
     const [filteredPapers, setFilteredPapers] = useState([]);
     const [sortCriteria, setSortCriteria] = useState('publishDate');
     const [searchQuery, setSearchQuery] = useState('');
+    const router = useRouter();
+    const { query } = router.query;
     
 
     useEffect(() => {
@@ -30,6 +32,13 @@ export default function SearchPage() {
             .then(data => setCategories(data))
             .catch(error => console.error('Error fetching categories', error));
     }, []);
+
+    useEffect(() => {
+      setSearchQuery(query);
+      handleSearch(query);
+    }, [searchQuery]);
+ 
+  
 
     const handleCategoryToggle = (category) => {
         setTempSelectedCategories(prev => {
