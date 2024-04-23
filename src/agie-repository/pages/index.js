@@ -1,13 +1,13 @@
 "use client"
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { Inter } from 'next/font/google';
 import PieChart from '../components/pieChart';
 import Footer from '../components/Footer';
 
-import styles from '@/styles/index.module.css'
+import styles from '../styles/index.module.css'
 
 
 // Define the Inter font with appropriate weights
@@ -20,19 +20,24 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   
 
-  const handleNavigation = () => {
-    router.push(`/pages/results?query=${searchQuery}`);
-};
-
-
-
-  const handleChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
 
   const handleSearch = () => {
-    handleNavigation(searchQuery);
+
+    router.push({
+      pathname: '/Results',
+      query: {query: searchQuery}
+
+    });
   };
+
+
+   const handleChange = (event) => {
+     setSearchQuery(event.target.value);
+   };
+
+  // const handleSearch = () => {
+  //   handleNavigation(searchQuery);
+  // };
 
   return (
     <div className="min-h-screen flex flex-col">
