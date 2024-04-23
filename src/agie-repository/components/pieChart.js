@@ -21,7 +21,8 @@ function PieChart() {
   const fetchCategories = async () => {
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL
-      const response = await fetch('http://127.0.0.1:8080/api/categoryData');
+      //const response = await fetch('http://127.0.0.1:8080/api/categoryData');
+      const response = await fetch('http://localhost:3000/api/dataCategories');
       const categories = await response.json();
       
       // Process the fetched data
