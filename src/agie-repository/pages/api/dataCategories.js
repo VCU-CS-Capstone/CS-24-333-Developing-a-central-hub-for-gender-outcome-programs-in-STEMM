@@ -15,7 +15,8 @@ export default async function handler(req, res) {
 
     const [data] = await connection.query(query, []);
 
-    res.status(200).json(data.map(item => item.categoryName));
+    //res.status(200).json(data.map(item => item.categoryName));
+    res.status(200).json(data);
 
   } catch (error) {
     console.error(error); 
