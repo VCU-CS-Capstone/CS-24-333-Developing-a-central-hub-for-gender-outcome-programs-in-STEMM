@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '@/styles/login.module.css'; // Importing the CSS for styling
+import styles from '../styles/login.module.css';
 import { useAuth } from '../Auth/AuthContext';
 import { useRouter } from 'next/router';
 
@@ -13,7 +13,7 @@ function LoginForm() {
     event.preventDefault();
     console.log('Logging in with', email, password);
     login(email, password);
-    router.push('/protected/search');
+    router.push('/search');
   };
 
   return (

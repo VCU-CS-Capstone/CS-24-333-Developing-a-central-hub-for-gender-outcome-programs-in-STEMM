@@ -1,5 +1,7 @@
 import mysql from "mysql2/promise";
 import connectDB from './db';
+import bcrypt from 'bcryptjs'; 
+
 
 export default async function handler(req, res) {
 

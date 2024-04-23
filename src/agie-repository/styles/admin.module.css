@@ -60,6 +60,26 @@
   background-color: #626464;
 }
 
+.adminContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px; 
+}
+
+.addButton {
+  background-color: #a0a0a0; 
+  color: white;
+  margin-bottom: -30px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.addButton:hover {
+  background-color: #7b7b7b; 
+  cursor: pointer;
+}
+
 .headerAdmin{
   font-weight: bolder;
   font-size: 30px;
