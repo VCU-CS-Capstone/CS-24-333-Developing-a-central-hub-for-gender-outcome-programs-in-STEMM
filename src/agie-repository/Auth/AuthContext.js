@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (email, password) => {
     // Mock authentication logic
-    if (email === 'user@example.com' && password === 'password123') {
+    if (email  && password) {
       console.log('User logged in:', email);
       setLoggedIn(true);
     } else {

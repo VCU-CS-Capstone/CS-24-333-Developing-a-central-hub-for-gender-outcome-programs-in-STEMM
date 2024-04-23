@@ -4,6 +4,7 @@ import { extractText } from "../util/textUtils"
 import { useRouter } from 'next/router';
 import styles from '../styles/admin.module.css';
 
+
 export default function Search() {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
@@ -74,8 +75,17 @@ export default function Search() {
         router.push('/selected');
     }, [selectedItems, router]);
 
+        // Function to add an administrative user (implementation needed)
+    const handleAddUser = useCallback(() => {
+        router.push('/CreateLogin');
+    }, []);
+
     return (
+        <div>
         <div className={styles.htmlAdmin}>
+            <div className={styles.adminContainer}>
+                <button className={styles.addButton} onClick={handleAddUser}>Add Administrator</button>
+            </div>            
             <form onSubmit={handleSubmit} className={styles.searchForm}>
                 <input
                     type="text"
@@ -124,6 +134,7 @@ export default function Search() {
                 </li>
             ))}
         </ul>
+    </div>
     </div>
 );
 }

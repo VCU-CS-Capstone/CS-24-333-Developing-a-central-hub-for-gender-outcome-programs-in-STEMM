@@ -7,8 +7,6 @@ import { Inter } from 'next/font/google';
 import PieChart from '../components/pieChart';
 import Footer from '../components/Footer';
 
-import styles from '@/styles/index.module.css'
-
 
 // Define the Inter font with appropriate weights
 const inter = Inter({ subsets: ['latin'], weights: ['400', '700'] }); // Include '700' for bold text
