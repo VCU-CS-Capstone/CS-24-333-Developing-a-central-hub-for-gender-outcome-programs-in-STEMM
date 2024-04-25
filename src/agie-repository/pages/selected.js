@@ -3,6 +3,7 @@ import { extractText } from "../util/textUtils";
 import Dropdown from "../components/dropdown"
 import { useRouter } from 'next/router';
 import styles from '../styles/admin.module.css';
+import { useAuth } from '../Auth/AuthContext';
 
 export default function Summary() {
     const [selectedArticles, setSelectedArticles] = useState([]);
@@ -10,8 +11,15 @@ export default function Summary() {
     const [newKeyword, setNewKeyword] = useState('');
     const [isLoadingDB, setIsLoadingDB] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const { isLoggedIn } = useAuth();
     const router = useRouter();
-    
+  
+    useEffect(() => {
+      if (!isLoggedIn) {
+        router.push('/Login');  // Redirect to login if not authenticated
+      }
+    }, [isLoggedIn, router]);
+  
 
     useEffect(() => {
         const storedArticles = JSON.parse(localStorage.getItem('selectedArticles') || '[]');

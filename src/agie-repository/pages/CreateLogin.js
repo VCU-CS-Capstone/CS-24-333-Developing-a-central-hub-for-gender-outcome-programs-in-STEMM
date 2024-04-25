@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/login.module.css'; 
 import { useRouter } from 'next/router';
+import useAuth from '../Auth/AuthContext';
 
 function CreateUserForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
+
+  useEffect(() => {
+      if (!isLoggedIn) {
+          router.push('/login');
+      }
+  }, [isLoggedIn]);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();

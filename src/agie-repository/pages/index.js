@@ -35,10 +35,6 @@ export default function Home() {
      setSearchQuery(event.target.value);
    };
 
-  // const handleSearch = () => {
-  //   handleNavigation(searchQuery);
-  // };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

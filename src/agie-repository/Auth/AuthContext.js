@@ -1,27 +1,30 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
 
-  const login = (email, password) => {
-    // Mock authentication logic
-    if (email  && password) {
-      console.log('User logged in:', email);
+  const login = async (email, password) => {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    
+    if (res.ok) {
       setLoggedIn(true);
-    } else {
-      alert('Invalid credentials');
+      router.push('/search');
     }
   };
 
-  const logout = () => {
-    console.log('User logged out');
-    setLoggedIn(false);
-  };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{isLoggedIn, login }}>
       {children}
     </AuthContext.Provider>
   );

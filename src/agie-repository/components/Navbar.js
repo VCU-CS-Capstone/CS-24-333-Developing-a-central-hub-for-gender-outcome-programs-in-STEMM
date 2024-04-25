@@ -23,7 +23,7 @@ const Navbar = () => {
 
        {/* Admin Login link */}
         <div className="flex items-center uppercase hover:border-b text-1xl bg-gold" style={{ color: '#CDAE5E' }}>
-           <Link href="/pages/Login">Admin Login</Link>
+           <Link href="/Login">Admin Login</Link>
         </div>
 
         {/* Three Line pop-up */}

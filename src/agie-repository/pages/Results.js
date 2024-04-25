@@ -11,9 +11,8 @@ export default function SearchPage() {
     const [tempSelectedCategories, setTempSelectedCategories] = useState([]);
     const [filteredPapers, setFilteredPapers] = useState([]);
     const [sortCriteria, setSortCriteria] = useState('publishDate');
-    const [searchQuery, setSearchQuery] = useState('');
+    const [query, setSearchQuery] = useState('');
     const router = useRouter();
-    const { query } = router.query;
     
 
     useEffect(() => {
@@ -32,13 +31,7 @@ export default function SearchPage() {
             .then(data => setCategories(data))
             .catch(error => console.error('Error fetching categories', error));
     }, []);
-
-    useEffect(() => {
-      setSearchQuery(query);
-      handleSearch(query);
-    }, [searchQuery]);
  
-  
 
     const handleCategoryToggle = (category) => {
         setTempSelectedCategories(prev => {
@@ -49,12 +42,17 @@ export default function SearchPage() {
             }
         });
     };
-    
+
     const applyFilters = () => {
-        if (tempSelectedCategories.length === 0) {
-            setFilteredPapers(allPapers);
-            setSelectedCategories([]);
-        } else {
+      if (tempSelectedCategories.length === 0 && query.trim() === '') {
+        // If no categories selected and search query is empty, reset filters
+        setFilteredPapers(allPapers);
+        setSelectedCategories([]);
+      } else if (tempSelectedCategories.length === 0) {
+        // If no categories selected but search query is not empty, apply only search query filter
+        handleSearch(query);
+        setSelectedCategories([]);
+      } else {
             const queryParams = new URLSearchParams();
             tempSelectedCategories.forEach(cat => queryParams.append('categoryName', cat));
 
@@ -91,6 +89,13 @@ export default function SearchPage() {
             })
             .catch(error => console.error('Error fetching papers by words', error));
     };
+  
+    useEffect(() => {
+      if (router.isReady) {
+          handleSearch(router.query.query);
+      }
+  }, [router.query, allPapers]);
+
   
     return (
         <>

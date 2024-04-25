@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { extractText } from "../util/textUtils"
 import { useRouter } from 'next/router';
 import styles from '../styles/admin.module.css';
+import { useAuth } from '../Auth/AuthContext';
 
 
 export default function Search() {
@@ -11,7 +12,15 @@ export default function Search() {
     const [loading, setLoading] = useState(false);
     const [visibleAbstractPmid, setVisibleAbstractPmid] = useState(null);
     const [selectedItems, setSelectedItems] = useState({});
+    const { isLoggedIn } = useAuth();
     const router = useRouter();
+  
+    useEffect(() => {
+      if (!isLoggedIn) {
+        router.push('/Login');  // Redirect to login if not authenticated
+      }
+    }, [isLoggedIn, router]);
+  
 
     useEffect(() => {
         const savedResults = sessionStorage.getItem('searchResults');

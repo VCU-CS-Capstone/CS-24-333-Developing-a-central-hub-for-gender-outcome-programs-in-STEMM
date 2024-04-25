@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../Auth/AuthContext';
-import { useRouter } from 'next/router';
 
-function LoginForm() {
+function LoginForm() {;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
-  const router = useRouter();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Logging in with', email, password);
-    login(email, password);
-    router.push('/search');
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+      login(email, password);
   };
 
   return (
