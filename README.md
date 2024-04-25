@@ -1,17 +1,14 @@
 # *CMSC-24-333 Gender Diversity Database*
 ## *VCU*
 ## *Short Project Description*
-The directory structure in this GitHub is to allow the project to have all its resources self-contained.
-Open Source software should not just be a repository of code.  There are a number of directories to help you and others that will 
-follow in your foot steps.  It'll also allow the Linux Foundation OMP Mentorship program to keep track of your project and get
-a better understanding of the problems you encountered during the developmemnt of this project.
+Our project focuses on developing a centralized repository to promote gender diversity and equity within Science, Technology, Engineering, Mathematics, and Medicine (STEMM) fields. By consolidating resources, initiatives, and research, our goal is to foster collaboration, empower woman, and drive systemic change. Through backend database development, frontend interface design, and strategic connections, we aim to provide a comprehensive solution that addresses the unique challenges faced by underrepresented genders in STEMM.
 
 | Folder | Description |
 |---|---|
-| Documentation |  all documentation the project team has created to describe the architecture, design, installation and configuratin of the peoject |
-| Notes and Research | Relavent information useful to understand the tools and techniques used in the project |
+| Documentation |  all documentation the project team has created to describe the architecture, design |
+| Notes and Research | Relavent information pertaining to tools and techniques used in project |
 | Status Reports | Project management documentation - weekly reports, milestones, etc. |
-| scr | Source code - create as many subdirectories as needed |
+| src | Source code & Installation guide|
 
 Google Drive Folder: Google Drive Folder: https://drive.google.com/drive/folders/1QihHS5XUBPD8FFhfSKFwHFJ_0BuJ9WXY?usp=sharing
 
