@@ -22,9 +22,9 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## ENV FILE (IMPORTANT)
+## env File (IMPORTANT)
 Login credentials should be located in a .env file. 
-Example set up of .env file: 
+Example .env file: 
 ```
 DB_HOST=HOST
 DB_USER=USERNAME
