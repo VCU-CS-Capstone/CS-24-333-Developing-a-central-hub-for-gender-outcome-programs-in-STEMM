@@ -53,7 +53,7 @@ const Navbar = () => {
                   Home
                 </li>
             </Link>
-            <Link href="/pages/about">
+            <Link href="/About">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -61,7 +61,7 @@ const Navbar = () => {
                   About
                 </li>
             </Link>
-            <Link href="/pages/contact">
+            <Link href="/Contact">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -69,7 +69,7 @@ const Navbar = () => {
                   Contact Us
                 </li>
             </Link>
-            <Link href="/pages/results">
+            <Link href="/Results">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -77,7 +77,7 @@ const Navbar = () => {
                   Search All Database
                 </li>
             </Link>
-            <Link href="/pages/login">
+            <Link href="/Login">
               <li
                 onClick={() => setMenuOpen(false)}
                 className="py-4 cursor-pointer"
@@ -93,10 +93,10 @@ const Navbar = () => {
       <div className="hidden sm:flex items-center justify-start">
           <ul className="hidden sm:flex">
             <li className="ml-9 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
-              <Link href="/pages/about">About</Link>
+              <Link href="/About">About</Link>
             </li>
             <li className="ml-9 uppercase hover:border-b text-xl bg-gold my-3" style={{ color: '#CDAE5E' }}>
-              <Link href="/pages/contact">Contact Us</Link>
+              <Link href="/Contact">Contact Us</Link>
             </li>
             <li className="ml-9 uppercase hover:border-b text-xl my-3" style={{ color: '#CDAE5E' }}>
               <Link href="/Results">Search Database</Link>
