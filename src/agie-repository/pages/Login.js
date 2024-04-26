@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from '../styles/login.module.css';
 import { useAuth } from '../Auth/AuthContext';
+import Navbar from '../components/Navbar.js'
+import Footer from '../components/Footer.js'
 
 function LoginForm() {;
   const [email, setEmail] = useState('');
@@ -13,6 +15,8 @@ function LoginForm() {;
   };
 
   return (
+    <div>
+      <Navbar />
     <form className={styles["login-form"]} onSubmit={handleSubmit}>
       <h2>Login</h2>
       <div>
@@ -39,6 +43,8 @@ function LoginForm() {;
       </div>
       <button type="submit">Log In</button>
     </form>
+    <Footer />
+    </div>
   );
 }
 
